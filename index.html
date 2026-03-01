@@ -81,15 +81,16 @@ h1 {
     flex-direction: column;
     align-items: center;
     width: 120px;
-    height: 120px; /* fixed height for consistent layout */
+    height: 120px;
 }
 .vacation-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* auto-crop and fill box without distortion */
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 5px;
     transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
 }
 .vacation-item img:hover {
     transform: scale(1.05);
@@ -98,6 +99,40 @@ h1 {
 .vacation-item .caption {
     font-size: 0.9rem;
     text-align: center;
+}
+
+/* Lightbox CSS */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+.lightbox-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.lightbox-close:hover {
+  color: #bbb;
 }
 </style>
 </head>
@@ -129,19 +164,24 @@ h1 {
         <div class="vacation">
             <div class="vacation-item">
                 <img src="images/canalboat.jpg" alt="Canal Boat">
-                <div class="caption">Canal Boat</div>
+
             </div>
             <div class="vacation-item">
                 <img src="images/kelpies.jpg" alt="The Kelpies">
-                <div class="caption">The Kelpies</div>
+         
             </div>
             <div class="vacation-item">
                 <img src="images/edinburgh_castle.jpg" alt="Edinburgh Castle">
-                <div class="caption">Edinburgh Castle</div>
+                
             </div>
         </div>
     </div>
+</div>
 
+<!-- Lightbox HTML -->
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
 </div>
 
 <script>
@@ -207,6 +247,24 @@ function update() {
 
 update();
 setInterval(update, 1000);
+
+// Lightbox functionality
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.getElementsByClassName("lightbox-close")[0];
+
+// Open lightbox when any vacation image is clicked
+document.querySelectorAll(".vacation-item img").forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.style.display = "block";
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+    });
+});
+
+// Close lightbox
+closeBtn.onclick = () => { lightbox.style.display = "none"; }
+lightbox.onclick = (e) => { if(e.target === lightbox) lightbox.style.display = "none"; }
 </script>
 
 </body>
