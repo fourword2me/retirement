@@ -4,178 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jon Frazer Dashboard</title>
+
+<!-- iOS Home Screen Support -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Jon Frazer Dashboard">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link id="appleIcon" rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
 <style>
+/* ...keep all your previous CSS here... */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+    margin: 0; padding: 0; height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
 }
 .container {
-    width: 95%;
-    max-width: 1000px;
-    height: 95vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
-    background: rgba(0,0,0,0.6);
-    border-radius: 20px;
-    padding: 20px;
-    box-sizing: border-box;
+    width: 95%; max-width: 1000px; height: 95vh;
+    display: flex; flex-direction: column; justify-content: space-evenly;
+    align-items: center; text-align: center;
+    background: rgba(0,0,0,0.6); border-radius: 20px;
+    padding: 20px; box-sizing: border-box;
 }
-h1 {
-    font-size: 2.5rem;
-    margin: 0;
-}
-.section {
-    margin: 10px 0;
-}
-.countdown {
-    font-size: 1.8rem;
-}
-.workdays {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #00ff87;
-    text-shadow: 0 0 20px rgba(0,255,135,0.7);
-}
-.label {
-    font-size: 1.2rem;
-    opacity: 0.8;
-}
-.progress-container {
-    background: rgba(255,255,255,0.15);
-    border-radius: 20px;
-    height: 25px;
-    overflow: hidden;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 10px;
-}
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #00c6ff, #0072ff);
-    transition: width 1s ease;
-}
-.progress-text {
-    margin-top: 8px;
-    font-size: 1.1rem;
-}
-.vacation {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 15px;
-}
-.vacation-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 120px;
-    height: 120px;
-}
-.vacation-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 5px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-}
-.vacation-item img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
-}
-.vacation-item .caption {
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-/* Lightbox CSS */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.9);
-}
-.lightbox-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-}
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.lightbox-close:hover {
-  color: #bbb;
-}
+/* Add your previous CSS for headings, sections, countdown, workdays, progress bar, vacation images, lightbox etc. */
+/* Include #generateIconBtn styles as before */
 </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Jon Frazer's Retirement Dashboard 🚀</h1>
-
-    <div class="section">
-        <div id="countdown" class="countdown"></div>
-    </div>
-
-    <div class="section">
-        <div id="workdays" class="workdays"></div>
-        <div class="label">Workdays Remaining</div>
-    </div>
-
+    <div class="section"><div id="countdown" class="countdown"></div></div>
+    <div class="section"><div id="workdays" class="workdays"></div><div class="label">Workdays Remaining</div></div>
     <div class="section">
         <div class="label">Career Progress</div>
-        <div class="progress-container">
-            <div id="careerBar" class="progress-bar"></div>
-        </div>
+        <div class="progress-container"><div id="careerBar" class="progress-bar"></div></div>
         <div id="careerText" class="progress-text"></div>
     </div>
-
     <div class="section">
         <div id="vacationCountdown" class="countdown"></div>
         <div class="label">Scotland Vacation: May 9–25, 2026</div>
         <div class="vacation">
-            <div class="vacation-item">
-                <img src="images/canalboat.jpg" alt="Canal Boat">
-
-            </div>
-            <div class="vacation-item">
-                <img src="images/kelpies.jpg" alt="The Kelpies">
-         
-            </div>
-            <div class="vacation-item">
-                <img src="images/edinburgh_castle.jpg" alt="Edinburgh Castle">
-                
-            </div>
+            <div class="vacation-item"><img src="images/canalboat.jpg" alt="Canal Boat"><div class="caption">Canal Boat</div></div>
+            <div class="vacation-item"><img src="images/kelpies.jpg" alt="The Kelpies"><div class="caption">The Kelpies</div></div>
+            <div class="vacation-item"><img src="images/edinburgh_castle.jpg" alt="Edinburgh Castle"><div class="caption">Edinburgh Castle</div></div>
         </div>
     </div>
+    <button id="generateIconBtn">Generate Home Screen Icon</button>
 </div>
 
 <!-- Lightbox HTML -->
@@ -185,26 +61,22 @@ h1 {
 </div>
 
 <script>
+// Dashboard countdown functions
 const retirementDate = new Date("May 15, 2026 00:00:00");
 const careerStart = new Date("January 1, 1990 00:00:00");
 const vacationStart = new Date("May 9, 2026 00:00:00");
 const vacationEnd = new Date("May 25, 2026 23:59:59");
 
 function getWorkdaysRemaining(start, end) {
-    let count = 0;
-    let current = new Date(start);
-    while (current <= end) {
-        const day = current.getDay();
-        if(day !== 0 && day !== 6) count++;
-        current.setDate(current.getDate() +1);
-    }
+    let count = 0, current = new Date(start);
+    while(current <= end){ const day = current.getDay(); if(day!==0 && day!==6) count++; current.setDate(current.getDate()+1);}
     return count;
 }
 
-function formatCountdown(target) {
+function formatCountdown(target){
     const now = new Date();
     const distance = target - now;
-    if(distance <= 0) return "Event Started!";
+    if(distance <=0) return "Event Started!";
     const days = Math.floor(distance / (1000*60*60*24));
     const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
     const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
@@ -212,60 +84,65 @@ function formatCountdown(target) {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 
-function update() {
+function updateDashboard(){
     const now = new Date();
-    
-    // Retirement countdown
-    const distanceRetire = retirementDate - now;
-    document.getElementById("countdown").textContent =
-        distanceRetire > 0 ?
-        `${formatCountdown(retirementDate)} until Retirement (May 15, 2026)` :
-        "YOU'RE RETIRED 🎉";
-
-    // Workdays remaining
+    // Retirement
+    document.getElementById("countdown").textContent = retirementDate-now>0 ? formatCountdown(retirementDate)+" until Retirement (May 15, 2026)" : "YOU'RE RETIRED 🎉";
+    // Workdays
     const workdays = getWorkdaysRemaining(now, retirementDate);
     document.getElementById("workdays").textContent = workdays;
-
     // Career progress
-    const totalCareer = retirementDate - careerStart;
-    const completed = now - careerStart;
-    const percent = Math.min((completed/totalCareer)*100,100);
-    document.getElementById("careerBar").style.width = percent + "%";
-    document.getElementById("careerText").textContent = percent.toFixed(2) + "% Complete";
+    const percent = Math.min((now-careerStart)/(retirementDate-careerStart)*100,100);
+    document.getElementById("careerBar").style.width = percent+"%";
+    document.getElementById("careerText").textContent = percent.toFixed(2)+"% Complete";
+    // Vacation
+    let vacText="";
+    if(now<vacationStart) vacText = formatCountdown(vacationStart)+" until Scotland Vacation";
+    else if(now<=vacationEnd) vacText="Vacation Started! 🎉";
+    else vacText="Vacation Over 😢";
+    document.getElementById("vacationCountdown").textContent = vacText;
 
-    // Vacation countdown
-    let vacationText = "";
-    if(now < vacationStart) {
-        vacationText = formatCountdown(vacationStart) + " until Scotland Vacation";
-    } else if(now >= vacationStart && now <= vacationEnd) {
-        vacationText = "Vacation Started! 🎉";
-    } else {
-        vacationText = "Vacation Over 😢";
-    }
-    document.getElementById("vacationCountdown").textContent = vacationText;
+    // Generate icon automatically each time dashboard loads
+    generateIcon(workdays);
 }
 
-update();
-setInterval(update, 1000);
+updateDashboard();
+setInterval(updateDashboard,1000);
 
-// Lightbox functionality
+// Lightbox
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 const closeBtn = document.getElementsByClassName("lightbox-close")[0];
-
-// Open lightbox when any vacation image is clicked
-document.querySelectorAll(".vacation-item img").forEach(img => {
-    img.addEventListener("click", () => {
-        lightbox.style.display = "block";
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-    });
+document.querySelectorAll(".vacation-item img").forEach(img=>{
+    img.addEventListener("click",()=>{lightbox.style.display="block"; lightboxImg.src=img.src; lightboxImg.alt=img.alt;});
 });
+closeBtn.onclick = ()=>{lightbox.style.display="none";}
+lightbox.onclick = e=>{if(e.target===lightbox) lightbox.style.display="none";}
 
-// Close lightbox
-closeBtn.onclick = () => { lightbox.style.display = "none"; }
-lightbox.onclick = (e) => { if(e.target === lightbox) lightbox.style.display = "none"; }
+// Icon generator function
+function generateIcon(workdays){
+    const canvas=document.createElement('canvas');
+    canvas.width=180; canvas.height=180;
+    const ctx=canvas.getContext('2d');
+    // Background
+    ctx.fillStyle='#203a43'; ctx.fillRect(0,0,180,180);
+    ctx.beginPath(); ctx.arc(90,90,80,0,2*Math.PI); ctx.fillStyle='#00000080'; ctx.fill();
+    // Number
+    ctx.fillStyle='#00ff87'; ctx.font='bold 60px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(workdays,90,90);
+    // Label
+    ctx.font='bold 18px sans-serif'; ctx.fillText('Workdays',90,135);
+    // Convert to PNG and attach as home screen icon (with cache-buster)
+    const link=document.getElementById('appleIcon');
+    link.href=canvas.toDataURL('image/png')+"?v="+Date.now(); // cache-busting
+}
+
+// Manual button
+document.getElementById('generateIconBtn').addEventListener('click', ()=>{
+    const workdays=document.getElementById('workdays').textContent;
+    generateIcon(workdays);
+});
 </script>
-
 </body>
 </html>
