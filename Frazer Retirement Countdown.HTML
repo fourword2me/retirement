@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jon Frazer Retirement Countdown</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 95%;
+    max-width: 900px;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    border-radius: 20px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.section {
+    margin: 10px 0;
+}
+
+.countdown {
+    font-size: 2rem;
+}
+
+.workdays {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #00ff87;
+    text-shadow: 0 0 20px rgba(0,255,135,0.7);
+}
+
+.label {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.progress-container {
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    height: 25px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    transition: width 1s ease;
+}
+
+.progress-text {
+    margin-top: 8px;
+    font-size: 1.1rem;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Jon Frazer's Retirement Countdown 🚀</h1>
+
+    <div class="section">
+        <div id="countdown" class="countdown"></div>
+    </div>
+
+    <div class="section">
+        <div id="workdays" class="workdays"></div>
+        <div class="label">Workdays Remaining</div>
+    </div>
+
+    <div class="section">
+        <div class="label">Career Progress</div>
+        <div class="progress-container">
+            <div id="careerBar" class="progress-bar"></div>
+        </div>
+        <div id="careerText" class="progress-text"></div>
+    </div>
+</div>
+
+<script>
+const retirementDate = new Date("May 15, 2026 00:00:00");
+const careerStart = new Date("January 1, 1990 00:00:00");
+
+function getWorkdaysRemaining(start, end) {
+    let count = 0;
+    let current = new Date(start);
+    while (current <= end) {
+        const day = current.getDay();
+        if (day !== 0 && day !== 6) count++;
+        current.setDate(current.getDate() + 1);
+    }
+    return count;
+}
+
+function update() {
+    const now = new Date();
+
+    // Countdown
+    const distance = retirementDate - now;
+    if (distance <= 0) {
+        document.getElementById("countdown").textContent = "YOU'RE RETIRED 🎉";
+        document.getElementById("workdays").textContent = "0";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+    const seconds = Math.floor((distance % (1000*60))/1000);
+
+    document.getElementById("countdown").textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s until May 15, 2026`;
+
+    // Workdays
+    const workdays = getWorkdaysRemaining(now, retirementDate);
+    document.getElementById("workdays").textContent = workdays;
+
+    // Career progress
+    const totalCareer = retirementDate - careerStart;
+    const completed = now - careerStart;
+    const percent = Math.min((completed / totalCareer) * 100, 100);
+
+    document.getElementById("careerBar").style.width = percent + "%";
+    document.getElementById("careerText").textContent =
+        percent.toFixed(2) + "% Complete";
+}
+
+update();
+setInterval(update, 1000);
+</script>
+
+</body>
+</html>
